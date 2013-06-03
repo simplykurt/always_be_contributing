@@ -4,23 +4,25 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'always_be_contributing/version'
 
 Gem::Specification.new do |spec|
-  spec.name              = "always_be_contributing"
+  spec.name              = 'always_be_contributing'
   spec.version           = AlwaysBeContributing::VERSION
-  spec.author            = "Joseph Anthony Pasquale Holsten"
-  spec.email             = "joseph@josephholsten.com"
-  spec.homepage          = "https://github.com/josephholsten/always_be_contributing"
+  spec.author            = 'Joseph Anthony Pasquale Holsten'
+  spec.email             = 'joseph@josephholsten.com'
+  spec.homepage          =
+    'https://github.com/josephholsten/always_be_contributing'
   spec.description = <<-EOF
     Always Be Contributing counts who has
     contributing most to your organization on Github.
   EOF
   spec.extra_rdoc_files  = %w[ LICENSE README.md ]
-  spec.rdoc_options      << "--title" << "Always Be Contributing Documentation" <<
-                            "--main"  << "README.md"
+  spec.rdoc_options      <<
+    '--title' << 'Always Be Contributing Documentation' <<
+    '--main'  << 'README.md'
   spec.license           = 'ISC'
   spec.summary           = spec.description.split(/\.\s+/).first
-  spec.files             = `git ls-files`.split($/)
-  spec.executables       = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files        = spec.files.grep(%r{^(test|spec|features)/})
+  spec.files             = `git ls-files`.split($RS)
+  spec.executables       = spec.files.grep(/^bin\//) { |f| File.basename(f) }
+  spec.test_files        = spec.files.grep(/^(test|spec|features)\//)
 
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'

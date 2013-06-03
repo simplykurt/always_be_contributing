@@ -5,6 +5,8 @@ require 'uri'
 require 'always_be_contributing/contribution'
 
 module AlwaysBeContributing
+  # A User knows how to grab its contributions from GitHub
+  # and select only the ones that apply to a date range
   class User < Struct.new(:name)
     # return a list of all Contributions available for this user
     def contributions
@@ -16,8 +18,8 @@ module AlwaysBeContributing
 
     # return a list of all Contributions since start_date
     def contributions_since(start_date)
-      contributions.select do |c|
-        c.date >= start_date
+      contributions.select do |contribution|
+        contribution.date >= start_date
       end
     end
 
@@ -30,6 +32,7 @@ module AlwaysBeContributing
     end
 
     private
+
     def contribution_url
       URI.parse "https://github.com/users/#{name}/contributions_calendar_data"
     end

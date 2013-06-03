@@ -15,48 +15,47 @@ require 'always_be_contributing/user'
 
 class TestUser < Minitest::Test
   def test_name
-    u = AlwaysBeContributing::User.new("bob")
-    assert_equal "bob", u.name
+    user = AlwaysBeContributing::User.new('bob')
+    assert_equal 'bob', user.name
   end
 
   def test_empty_contributions
-    u = AlwaysBeContributing::User.new("bob")
+    user = AlwaysBeContributing::User.new('bob')
     URI.expects(:parse).returns(stub(read: '[]'))
 
-    assert_equal [], u.contributions
+    assert_equal [], user.contributions
   end
-
 
   def test_contributions
-    u = AlwaysBeContributing::User.new("bob")
+    user = AlwaysBeContributing::User.new('bob')
     raw_contributions = '[["2012/06/01",1],["2012/06/02",2],["2012/06/03",3]]'
     URI.expects(:parse).returns(stub(read: raw_contributions))
 
     expected = [
-      AlwaysBeContributing::Contribution.new("2012/06/01", 1),
-      AlwaysBeContributing::Contribution.new("2012/06/02", 2),
-      AlwaysBeContributing::Contribution.new("2012/06/03", 3),
+      AlwaysBeContributing::Contribution.new('2012/06/01', 1),
+      AlwaysBeContributing::Contribution.new('2012/06/02', 2),
+      AlwaysBeContributing::Contribution.new('2012/06/03', 3),
     ]
-    assert_equal expected, u.contributions
+    assert_equal expected, user.contributions
   end
 
   def test_contributions_since
-    u = AlwaysBeContributing::User.new("bob")
+    user = AlwaysBeContributing::User.new('bob')
     raw_contributions = '[["2012/06/01",1],["2012/06/02",2],["2012/06/03",3]]'
     URI.expects(:parse).returns(stub(read: raw_contributions))
 
     expected = [
-      AlwaysBeContributing::Contribution.new("2012/06/02", 2),
-      AlwaysBeContributing::Contribution.new("2012/06/03", 3),
+      AlwaysBeContributing::Contribution.new('2012/06/02', 2),
+      AlwaysBeContributing::Contribution.new('2012/06/03', 3),
     ]
-    assert_equal expected, u.contributions_since(Date.parse("2012/06/02"))
+    assert_equal expected, user.contributions_since(Date.parse('2012/06/02'))
   end
 
-  def test_contributions_since
-    u = AlwaysBeContributing::User.new("bob")
+  def test_contribution_count_since
+    user = AlwaysBeContributing::User.new('bob')
     raw_contributions = '[["2012/06/01",1],["2012/06/02",2],["2012/06/03",3]]'
     URI.expects(:parse).returns(stub(read: raw_contributions))
 
-    assert_equal 5, u.contribution_count_since(Date.parse("2012/06/02"))
+    assert_equal 5, user.contribution_count_since(Date.parse('2012/06/02'))
   end
 end

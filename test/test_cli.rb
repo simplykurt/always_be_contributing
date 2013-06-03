@@ -14,7 +14,7 @@ require 'always_be_contributing/cli'
 
 class TestCLI < Minitest::Test
   def test_github_org
-    cli = AlwaysBeContributing::CLI.new(["foo"])
-    assert_equal "foo", cli.github_org
+    cli = AlwaysBeContributing::CLI.new(['foo'])
+    assert_equal 'foo', cli.github_org
   end
 end

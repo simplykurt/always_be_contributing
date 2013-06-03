@@ -1,7 +1,9 @@
+# Extends Date to add #beginning_of_month
 class Date
   def beginning_of_month
     change(day: 1)
   end
+
   def change(options)
     ::Date.new(
       options.fetch(:year, year),
